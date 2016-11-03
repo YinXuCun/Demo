@@ -5,7 +5,6 @@ package test;
 
 import junit.framework.*;
 import bean.PrimePrint;
-import org.junit.*;
 import org.junit.Assert;
 
 public class test extends TestCase {

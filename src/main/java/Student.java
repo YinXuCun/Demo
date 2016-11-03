@@ -2,6 +2,8 @@
  * Created by yinxu on 2016/10/23.
  */
 public class Student {
+    public Student(String  name){}
+    public  Student(){}
     int  id;
     String   name;
 

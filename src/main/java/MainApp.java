@@ -15,7 +15,8 @@ import java.util.ArrayList;
 public class MainApp {
 
     public static void main(String args[])  {
-        ArrayList<FileBean> lsit;
+        System.out.println(2^4);
+        /*ArrayList<FileBean> lsit;
         AbstractApplicationContext context= new ClassPathXmlApplicationContext("\\Beans.xml");
         FileDao fileDao= (FileDao) context.getBean("FileDao");
 
@@ -40,7 +41,7 @@ public class MainApp {
 
         }
 
-        context.registerShutdownHook();
+        context.registerShutdownHook();*/
 
     }
 }
