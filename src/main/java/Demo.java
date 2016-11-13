@@ -19,7 +19,30 @@ import java.util.*;
  */
 public class Demo {
 
-    static Map<String,Object> services=new HashMap<String,Object>();
+    public  static void main(String args[]) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, NoSuchFieldException {
+
+        Scanner in = new Scanner(System.in);
+        int a,b;
+        String  next;
+        while (true) {
+            if((next=in.nextLine())!=null){
+                a=Integer.parseInt(String.valueOf(next.charAt(0)));
+                b=Integer.parseInt(String.valueOf(next.charAt(2)));
+                System.out.println(a+b);
+            }
+
+
+
+        else
+            break;
+        }
+      /*  Scanner in = new Scanner(System.in);
+        String month = in.next();
+        String day = in.next();
+        String year = in.next();
+        int  date= (2004-1)*365+((2004-1)/4)-((2004-1)/100)+((2004-1)/400)+(31+29+31+30+1) ;
+*/
+    /*   static Map<String,Object> services=new HashMap<String,Object>();
     private static AbstractApplicationContext context;
     private static Logger logger = LogManager.getLogger("helloLog4j");
     static Map<String  ,String> globalinfo=new HashMap<String, String>();
@@ -27,7 +50,7 @@ public class Demo {
     static  boolean flag=true;
     static {
 
-      /*  Scanner scanner=new Scanner(System.in);
+     Scanner scanner=new Scanner(System.in);
         B=scanner.nextInt();
         H=scanner.nextInt();
         if(!(B>=0&&H>=0)){
@@ -36,19 +59,12 @@ public class Demo {
         }
 
 
-        String s=String.valueOf();*/
+        String s=String.valueOf();
 
 //        globalinfo.put("databaseName","database_url");
 //        globalinfo.put("fileName","file_url");
-    }
+    }*/
 
-    public  static void main(String args[]) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, NoSuchFieldException {
-
-        Scanner in = new Scanner(System.in);
-        String month = in.next();
-        String day = in.next();
-        String year = in.next();
-        int  date= (2004-1)*365+((2004-1)/4)-((2004-1)/100)+((2004-1)/400)+(31+29+31+30+1) ;
 
       /*if(flag){
           int area=B*H;
