@@ -2,16 +2,28 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.appender.SyslogAppender;
 import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellAddress;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.format.datetime.joda.DateTimeFormatterFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -19,23 +31,111 @@ import java.util.*;
  */
 public class Demo {
 
-    public  static void main(String args[]) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, NoSuchFieldException {
 
-        Scanner in = new Scanner(System.in);
-        int a,b;
-        String  next;
-        while (true) {
-            if((next=in.nextLine())!=null){
-                a=Integer.parseInt(String.valueOf(next.charAt(0)));
-                b=Integer.parseInt(String.valueOf(next.charAt(2)));
-                System.out.println(a+b);
-            }
+    public static void main(String args[]) throws IOException {
 
 
 
-        else
-            break;
+        Calendar now = Calendar.getInstance();
+        System.out.println("年: " + now.get(Calendar.YEAR));
+        System.out.println("月: " + (now.get(Calendar.MONTH) + 1) + "");
+        System.out.println("日: " + now.get(Calendar.DAY_OF_MONTH));
+        System.out.println("时: " + now.get(Calendar.HOUR_OF_DAY));
+        System.out.println("分: " + now.get(Calendar.MINUTE));
+        System.out.println("秒: " + now.get(Calendar.SECOND));
+     /*   SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try {
+            date=fmt.parse("2017-3-25");
+
+            long  time=date.getTime();
+            Date date1=new Date(time);
+            System.out.println(date1.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
+
+        /*ExtractDataFromeExcel excelPress=new ExtractDataFromeExcel("C:\\Users\\yinxu\\Documents\\ddyx.xls");
+        String   str="2017-3-24";
+        DateFormat format=DateFormat.getDateInstance();
+        try {
+            Date date=format.parse(str);
+            Date    curDate    =   new Date(System.currentTimeMillis());
+
+
+            long nh = 1000*60*60;
+            long diff=curDate.getTime()-date.getTime();
+
+            long hour = diff/nh;
+            System.out.println(hour);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+*//*
+        ExtractDataFromeExcel extractDataFromeExcel=new ExtractDataFromeExcel("C:\\Users\\yinxu\\Documents\\ddyxs.xls")
+        ArrayList<String> arrayList=extractDataFromeExcel.ExtractData();
+        HashMap<String,String> hashMap=new HashMap<String, String>();
+        for (String  s:arrayList) {
+            String[] ss = s.split("flower");
+            if (ss.length == 1) {
+
+                hashMap.put(ss[0], " ");
+                System.out.println(s);
+            } else {
+                hashMap.put(ss[0], ss[1]);
+                System.out.println(s);
+            }
+        }
+        for (Object s:hashMap.keySet().toArray()){
+            System.out.println("hashMaap"+(String)s+hashMap.get(s));
+        }
+*/
+
+             /*       try {
+                        InputStream excel = new FileInputStream("C:\\Users\\yinxu\\Documents\\ddyxs.xls");
+                        HSSFWorkbook wb = new HSSFWorkbook(excel);
+                        HSSFSheet sheet = wb.getSheetAt(0);
+                        Iterator<Row> rows = sheet.rowIterator();
+                        while (rows.hasNext()) {
+                            HSSFRow row = (HSSFRow) rows.next();
+                            System.out.println(row.getLastCellNum());
+                            // Iterate over each cell in the row and print out the cell"s
+                            // content
+                            Iterator<Cell> cells = row.cellIterator();
+                            while (cells.hasNext()) {
+                                HSSFCell cell = (HSSFCell) cells.next();
+                                switch (cell.getCellType()) {
+                                    case HSSFCell.CELL_TYPE_NUMERIC:
+                                        System.out.println("HSSFCell.CELL_TYPE_NUMERIC:"+cell.getAddress());
+                                        break;
+                                    case HSSFCell.CELL_TYPE_STRING:
+                                        System.out.println("HSSFCell.CELL_TYPE_STRING:"+cell.getAddress());
+                                        break;
+                                    case HSSFCell.CELL_TYPE_BOOLEAN:
+                                        System.out.println("HSSFCell.CELL_TYPE_BOOLEAN:"+cell.getAddress());
+                                        break;
+                                    case HSSFCell.CELL_TYPE_FORMULA:
+                                        System.out.println("HSSFCell.CELL_TYPE_FORMULA:"+cell.getAddress());
+                                        break;
+                                    case HSSFCell.CELL_TYPE_BLANK:
+                                        System.out.println("HSSFCell.CELL_TYPE_BLANK"+cell.getAddress());
+                                        break;
+                                    default:
+                                        System.out.println("defult"+cell.getAddress());
+                                        break;
+                                }
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }*/
+    }
+
+}
       /*  Scanner in = new Scanner(System.in);
         String month = in.next();
         String day = in.next();
@@ -209,8 +309,5 @@ public class Demo {
 
 
 
-    }
 
-
-}
  

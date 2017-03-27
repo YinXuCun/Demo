@@ -16,7 +16,7 @@ public class MainApp {
 
     public static void main(String args[])  {
         System.out.println(2^4);
-        /*ArrayList<FileBean> lsit;
+        ArrayList<FileBean> lsit;
         AbstractApplicationContext context= new ClassPathXmlApplicationContext("\\Beans.xml");
         FileDao fileDao= (FileDao) context.getBean("FileDao");
 
@@ -41,7 +41,7 @@ public class MainApp {
 
         }
 
-        context.registerShutdownHook();*/
+        context.registerShutdownHook();
 
     }
 }

@@ -1,20 +1,28 @@
-import java.io.*;
-import java.util.*;
-
-
 /**
  * Created by yinxu on 2016/11/6.
  */
 public class Main {
-
-
-    public static void main(String args[])  {
-        Scanner in=new Scanner(System.in);
-
-
-
+    public static void main(String[] args) {
+        System.out.println("桩号");
+        String   ss="桩号";
+        System.out.println(ss);
+       /* FTPClientUtil f = new FTPClientUtil("123.206.30.169", 21, "anonymous", "");
+        try {
+            if (f.open()) {
+                // 远程路径为相对路径
+                f.get("/ddyx.xls", "C:\\Users\\yinxu\\Documents\\ddyxs.xls");
+                f.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 }
+
+
+
+
+
 
       /*
       Scanner in =new Scanner(System.in);
