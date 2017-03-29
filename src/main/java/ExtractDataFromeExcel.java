@@ -39,6 +39,8 @@ public class ExtractDataFromeExcel {
     private  int  firstcolumn;
     private int lastcolumn;
     private   int  station_num;
+    private  int  fires_ri;
+    private int  guoshuiliang;
     private int   station_name_cplumn;
     public ExtractDataFromeExcel(String filepath) throws IOException {
          this.filepath = filepath;
@@ -58,7 +60,6 @@ public class ExtractDataFromeExcel {
             StringBuilder result=null;
             Iterator<Row> rows = sheet.rowIterator();
             Cell cell;
-            String  namess;
             while (rows.hasNext()) {
                 result=new StringBuilder();
                 /*
@@ -66,8 +67,7 @@ public class ExtractDataFromeExcel {
                 * 遍历每一行
                 * */
             HSSFRow row = (HSSFRow) rows.next();
-            if (row.getRowNum()>1/*&&!row.getCell(0).getStringCellValue().equals("流量")&&!row.getCell(0).getStringCellValue()
-                    .equals("开机状态")*/) {
+            if (row.getRowNum()>1) {
 
 
                 /*
@@ -81,34 +81,34 @@ public class ExtractDataFromeExcel {
                 }else {
                     result.append(row.getCell(0).getStringCellValue() + " ");
 
-
-                }/*result.append(((row.getCell(station_num).getCellType()==Cell.CELL_TYPE_NUMERIC))?
-                        (row.getCell(station_num).getNumericCellValue()):((row.getCell(station_num).getCellType()==Cell.CELL_TYPE_STRING)?
-                        (row.getCell(station_num).getStringCellValue()):(null)));*/
+                }
                     result.append("flower");
                     Iterator<Cell> cellIterator = row.cellIterator();
                     while (cellIterator.hasNext()) {
                         cell = cellIterator.next();
-                        if (Water_level>firstcolumn&&cell.getAddress().getColumn()==Water_level){
+                        if (guoshuiliang!=0&&cell.getAddress().getColumn()>=guoshuiliang){
+                            result.append((((cell.getAddress().getColumn()-guoshuiliang)==0)?("日过水量"):("总过水量"))+"|过水量|"+df.format(cell.getNumericCellValue())+" ");
+                        }
+                        if (Water_level!=0&&control_water_level!=0&&keep_water_level!=0&&cell.getAddress().getColumn()>fires_ri&&Water_level<firstcolumn&&cell.getAddress().getColumn()<firstcolumn&&cell.getAddress().getColumn()>=Water_level){
                             if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
-                            result.append("设计水位"+cell.getNumericCellValue()+" ");
+                                result.append((((cell.getAddress().getColumn()-fires_ri)%2==0)?("上游"):("下游"))+"|设计水位|"+df.format(cell.getNumericCellValue())+" ");
                             else
                                 result.append("设计水位"+cell.getStringCellValue()+" ");
 
                         }
-                         if (cell.getAddress().getColumn()==keep_water_level&&keep_water_level>firstcolumn){
+                        if (Water_level!=0&&control_water_level!=0&&keep_water_level!=0&&cell.getAddress().getColumn()<firstcolumn&&cell.getAddress().getColumn()>=keep_water_level&&keep_water_level<firstcolumn){
                             if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
-                                result.append("保温水位"+cell.getNumericCellValue()+" ");
+                                result.append((((cell.getAddress().getColumn()-fires_ri)%2==0)?("上游"):("下游"))+"|保温水位|"+df.format(cell.getNumericCellValue())+" ");
                             else
                                 result.append("保温水位"+cell.getStringCellValue()+" ");
-                         }
-                         if (cell.getAddress().getColumn()==control_water_level&&control_water_level>firstcolumn){
+                        }
+                        if (Water_level!=0&&control_water_level!=0&&keep_water_level!=0&&cell.getAddress().getColumn()<firstcolumn&&cell.getAddress().getColumn()>=control_water_level&&control_water_level<firstcolumn){
 
-                             if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
-                                 result.append("控制水位"+cell.getNumericCellValue()+" ");
-                             else
-                                 result.append("控制水位"+cell.getStringCellValue()+" ");
-                         }
+                            if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+                                result.append((((cell.getAddress().getColumn()-fires_ri)%2==0)?("上游"):("下游"))+"|控制水位|"+df.format(cell.getNumericCellValue())+" ");
+                            else
+                                result.append("控制水位"+cell.getStringCellValue()+" ");
+                        }
                         if (cell.getAddress().getColumn() >= firstcolumn && cell.getAddress().getColumn()
                                 <= lastcolumn && cell.getCellType() == Cell.CELL_TYPE_STRING) {
                         /*
@@ -117,10 +117,10 @@ public class ExtractDataFromeExcel {
                          * */
                             result.append(((cell.getAddress().getColumn() - firstcolumn)
                                     <= 1 ? (cell.getAddress().getColumn() - firstcolumn == 0 ?
-                                    ("上游,0:00" + ",") : ("下游,0:00" + ",")) : (
+                                    ("上游|0:00" + "|") : ("下游|0:00" + "|")) : (
                                     ((cell.getAddress().getColumn() - firstcolumn) % 2 == 0) ?
-                                            ("上游," + (((cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00") : ("下游," + ((
-                                            (cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00")) + ","
+                                            ("上游|" + (((cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00") : ("下游|" + ((
+                                            (cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00")) + "|"
                                     + cell.getStringCellValue() + " "
                             ));
 
@@ -128,10 +128,10 @@ public class ExtractDataFromeExcel {
                         if (cell.getAddress().getColumn() >= firstcolumn && cell.getAddress().getColumn()
                                 <= lastcolumn && cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
                             result.append((((cell.getAddress().getColumn() - firstcolumn)
-                                    <= 1 ? (cell.getAddress().getColumn() - firstcolumn == 0 ? ("上游,0:00" + ",") : ("下游,0:00" + ","))
+                                    <= 1 ? (cell.getAddress().getColumn() - firstcolumn == 0 ? ("上游|0:00" + "|") : ("下游|0:00" + "|"))
                                     : (((cell.getAddress().getColumn() - firstcolumn) % 2 == 0) ?
-                                    ("上游," + (((cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00") : ("下游," + ((
-                                    (cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00")) + ","
+                                    ("上游|" + (((cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00") : ("下游|" + ((
+                                    (cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00")) + "|"
                             ) + df.format(cell.getNumericCellValue()) + " "
                             ));
                         }
@@ -163,6 +163,9 @@ public class ExtractDataFromeExcel {
                 switch (cell.getCellType()) {
                     case HSSFCell.CELL_TYPE_STRING:
                         String s = cell.getStringCellValue();
+                        if(s.equals("设计水位")){
+                            fires_ri=cell.getAddress().getColumn();
+                        }
                         if (s.equals("0:00")){
                             firstcolumn=cell.getAddress().getColumn();
                         }
@@ -177,7 +180,12 @@ public class ExtractDataFromeExcel {
                             station_num=cell.getAddress().getColumn();
 
                         }
+                        if (s.contains("过水量"))
+                        {
+                            guoshuiliang=cell.getAddress().getColumn();
+                        }
                         if (s.equals("设计水位")){
+
                             Water_level=cell.getAddress().getColumn();
                         }
                         if (s.equals("控制水位")){
