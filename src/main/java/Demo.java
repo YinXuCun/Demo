@@ -33,6 +33,75 @@ public class Demo {
 
 
     public static void main(String args[]) throws IOException {
+      ExtractDataFromeExcel extractDataFromeExcel=new ExtractDataFromeExcel("C:\\Users\\yinxu\\Documents\\ddyx.xls");
+        ArrayList<String> arrayList=extractDataFromeExcel.ExtractData();
+        HashMap<String,String> hashMap=new HashMap<String, String>();
+        for (String  s:arrayList) {
+            String[] ss = s.split("flower");
+            if (ss.length == 1) {
+
+                hashMap.put(ss[0], " ");
+                System.out.println(s);
+            } else {
+                hashMap.put(ss[0], ss[1]);
+                System.out.println(s);
+            }
+        }
+        for (Object s:hashMap.keySet().toArray()){
+            System.out.println("hashMaap"+(String)s+hashMap.get(s));
+        }
+       /* try {
+            InputStream excel = new FileInputStream("C:\\Users\\yinxu\\Documents\\ddyxs.xls");
+            HSSFWorkbook wb = new HSSFWorkbook(excel);
+            HSSFSheet sheet = wb.getSheetAt(0);
+            Iterator<Row> rows = sheet.rowIterator();
+            while (rows.hasNext()) {
+                HSSFRow row = (HSSFRow) rows.next();
+                System.out.println(row.getLastCellNum());
+                // Iterate over each cell in the row and print out the cell"s
+                // content
+                Iterator<Cell> cells = row.cellIterator();
+                while (cells.hasNext()) {
+                    HSSFCell cell = (HSSFCell) cells.next();
+                    switch (cell.getCellType()) {
+                        case HSSFCell.CELL_TYPE_NUMERIC:
+                            System.out.println("HSSFCell.CELL_TYPE_NUMERIC:"+cell.getAddress());
+                            break;
+                        case HSSFCell.CELL_TYPE_STRING:
+                            System.out.println("HSSFCell.CELL_TYPE_STRING:"+cell.getAddress());
+                            break;
+                        case HSSFCell.CELL_TYPE_BOOLEAN:
+                            System.out.println("HSSFCell.CELL_TYPE_BOOLEAN:"+cell.getAddress());
+                            break;
+                        case HSSFCell.CELL_TYPE_FORMULA:
+                            System.out.println("HSSFCell.CELL_TYPE_FORMULA:"+cell.getAddress());
+                            break;
+                        case HSSFCell.CELL_TYPE_BLANK:
+                            System.out.println("HSSFCell.CELL_TYPE_BLANK"+cell.getAddress());
+                            break;
+                        default:
+                            System.out.println("defult"+cell.getAddress());
+                            break;
+                    }
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+*/
+        /* String info="12|10.39";
+        ArrayList rr=new ArrayList<String>();
+
+
+            String[] strings1=info.split("\\|");
+        for (String s:strings1){
+            rr.add(Integer.parseInt(strings1[0]),s);
+        }
+            int num=  Integer.parseInt(strings1[0]);
+        System.out.println(rr);*/
+
+        }
 
 
 /*
@@ -75,66 +144,11 @@ public class Demo {
             e.printStackTrace();
         }
 */
-        ExtractDataFromeExcel extractDataFromeExcel=new ExtractDataFromeExcel("C:\\Users\\yinxu\\Documents\\ddyxs.xls");
-        ArrayList<String> arrayList=extractDataFromeExcel.ExtractData();
-        HashMap<String,String> hashMap=new HashMap<String, String>();
-        for (String  s:arrayList) {
-            String[] ss = s.split("flower");
-            if (ss.length == 1) {
 
-                hashMap.put(ss[0], " ");
-                System.out.println(s);
-            } else {
-                hashMap.put(ss[0], ss[1]);
-                System.out.println(s);
-            }
-        }
-        for (Object s:hashMap.keySet().toArray()){
-            System.out.println("hashMaap"+(String)s+hashMap.get(s));
-        }
-
-             /*       try {
-                        InputStream excel = new FileInputStream("C:\\Users\\yinxu\\Documents\\ddyxs.xls");
-                        HSSFWorkbook wb = new HSSFWorkbook(excel);
-                        HSSFSheet sheet = wb.getSheetAt(0);
-                        Iterator<Row> rows = sheet.rowIterator();
-                        while (rows.hasNext()) {
-                            HSSFRow row = (HSSFRow) rows.next();
-                            System.out.println(row.getLastCellNum());
-                            // Iterate over each cell in the row and print out the cell"s
-                            // content
-                            Iterator<Cell> cells = row.cellIterator();
-                            while (cells.hasNext()) {
-                                HSSFCell cell = (HSSFCell) cells.next();
-                                switch (cell.getCellType()) {
-                                    case HSSFCell.CELL_TYPE_NUMERIC:
-                                        System.out.println("HSSFCell.CELL_TYPE_NUMERIC:"+cell.getAddress());
-                                        break;
-                                    case HSSFCell.CELL_TYPE_STRING:
-                                        System.out.println("HSSFCell.CELL_TYPE_STRING:"+cell.getAddress());
-                                        break;
-                                    case HSSFCell.CELL_TYPE_BOOLEAN:
-                                        System.out.println("HSSFCell.CELL_TYPE_BOOLEAN:"+cell.getAddress());
-                                        break;
-                                    case HSSFCell.CELL_TYPE_FORMULA:
-                                        System.out.println("HSSFCell.CELL_TYPE_FORMULA:"+cell.getAddress());
-                                        break;
-                                    case HSSFCell.CELL_TYPE_BLANK:
-                                        System.out.println("HSSFCell.CELL_TYPE_BLANK"+cell.getAddress());
-                                        break;
-                                    default:
-                                        System.out.println("defult"+cell.getAddress());
-                                        break;
-                                }
-                }
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }*/
+             /*     */
     }
 
-}
+
       /*  Scanner in = new Scanner(System.in);
         String month = in.next();
         String day = in.next();

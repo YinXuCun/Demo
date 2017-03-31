@@ -3,9 +3,11 @@
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("桩号");
-        String   ss="桩号";
-        System.out.println(ss);
+        String s="下游|0:00|9.22";
+       String[]strings= s.split("\\|");
+       for (String ss:strings){
+           System.out.println(ss);
+       }
        /* FTPClientUtil f = new FTPClientUtil("123.206.30.169", 21, "anonymous", "");
         try {
             if (f.open()) {

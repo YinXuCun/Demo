@@ -92,22 +92,24 @@ public class ExtractDataFromeExcel {
                         if (Water_level!=0&&control_water_level!=0&&keep_water_level!=0&&cell.getAddress().getColumn()>fires_ri&&Water_level<firstcolumn&&cell.getAddress().getColumn()<firstcolumn&&cell.getAddress().getColumn()>=Water_level){
                             if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
                                 result.append((((cell.getAddress().getColumn()-fires_ri)%2==0)?("上游"):("下游"))+"|设计水位|"+df.format(cell.getNumericCellValue())+" ");
-                            else
-                                result.append("设计水位"+cell.getStringCellValue()+" ");
-
+                            else if(cell.getCellType()!=Cell.CELL_TYPE_BLANK&&!cell.getStringCellValue().equals("")) {
+                                result.append("设计水位" + cell.getStringCellValue().trim() + " ");
+                            }
                         }
                         if (Water_level!=0&&control_water_level!=0&&keep_water_level!=0&&cell.getAddress().getColumn()<firstcolumn&&cell.getAddress().getColumn()>=keep_water_level&&keep_water_level<firstcolumn){
                             if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
                                 result.append((((cell.getAddress().getColumn()-fires_ri)%2==0)?("上游"):("下游"))+"|保温水位|"+df.format(cell.getNumericCellValue())+" ");
-                            else
-                                result.append("保温水位"+cell.getStringCellValue()+" ");
+                            else if(cell.getCellType()!=Cell.CELL_TYPE_BLANK&&!cell.getStringCellValue().equals("")) {
+                                result.append("保温水位" + cell.getStringCellValue().trim() + " ");
+                            }
                         }
                         if (Water_level!=0&&control_water_level!=0&&keep_water_level!=0&&cell.getAddress().getColumn()<firstcolumn&&cell.getAddress().getColumn()>=control_water_level&&control_water_level<firstcolumn){
 
                             if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
                                 result.append((((cell.getAddress().getColumn()-fires_ri)%2==0)?("上游"):("下游"))+"|控制水位|"+df.format(cell.getNumericCellValue())+" ");
-                            else
-                                result.append("控制水位"+cell.getStringCellValue()+" ");
+                            else if(cell.getCellType()!=Cell.CELL_TYPE_BLANK&&!cell.getStringCellValue().equals("")) {
+                                result.append("控制水位" + cell.getStringCellValue().trim() + " ");
+                            }
                         }
                         if (cell.getAddress().getColumn() >= firstcolumn && cell.getAddress().getColumn()
                                 <= lastcolumn && cell.getCellType() == Cell.CELL_TYPE_STRING) {
@@ -121,7 +123,7 @@ public class ExtractDataFromeExcel {
                                     ((cell.getAddress().getColumn() - firstcolumn) % 2 == 0) ?
                                             ("上游|" + (((cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00") : ("下游|" + ((
                                             (cell.getAddress().getColumn() - firstcolumn) / 2)) * 2 + ":00")) + "|"
-                                    + cell.getStringCellValue() + " "
+                                    + cell.getStringCellValue().trim() + " "
                             ));
 
                         }
